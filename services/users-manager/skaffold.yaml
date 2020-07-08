@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: users-manager
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+    - image: slamdev/grpc-users-manager
+      docker:
+        cacheFrom:
+          - node:10-alpine
+          - slamdev/grpc-users-manager
+deploy:
+  kubectl: {}

@@ -1,0 +1,14 @@
+{
+  "http": {
+    "port": {
+      "default": null,
+      "env": "HTTP_PORT"
+    }
+  },
+  "grpc": {
+    "port": {
+      "default": null,
+      "env": "GRPC_PORT"
+    }
+  }
+}

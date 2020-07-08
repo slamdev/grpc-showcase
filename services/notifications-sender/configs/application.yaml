@@ -1,0 +1,4 @@
+http:
+  port: "@jinja {{env.HTTP_PORT | default(8080)}}"
+grpc:
+  port: "@jinja {{env.GRPC_PORT | default(9090)}}"

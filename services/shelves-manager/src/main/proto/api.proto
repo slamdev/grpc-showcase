@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package shelvesmanager;
+
+option java_multiple_files = true;
+option java_outer_classname = "ShelvesManagerProto";
+option java_package = "com.github.slamdev.grpcshowcase.shelvesmanager";
+
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+service ShelvesManager {
+  // Returns a list of all shelves in the bookstore.
+  rpc ListShelves(google.protobuf.Empty) returns (ListShelvesResponse) {
+    // Define HTTP mapping.
+    // Client example (Assuming your service is hosted at the given 'DOMAIN_NAME'):
+    //   curl http://DOMAIN_NAME/v1/shelves
+    option (google.api.http) = { get: "/v1/shelves" };
+  }
+  // Creates a new shelf in the bookstore.
+  rpc CreateShelf(CreateShelfRequest) returns (Shelf) {
+    // Client example:
+    //   curl -d '{"theme":"Music"}' http://DOMAIN_NAME/v1/shelves
+    option (google.api.http) = {
+      post: "/v1/shelves"
+      body: "shelf"
+    };
+  }
+  // Returns a specific bookstore shelf.
+  rpc GetShelf(GetShelfRequest) returns (Shelf) {
+    // Client example - returns the first shelf:
+    //   curl http://DOMAIN_NAME/v1/shelves/1
+    option (google.api.http) = { get: "/v1/shelves/{shelf}" };
+  }
+  // Deletes a shelf, including all books that are stored on the shelf.
+  rpc DeleteShelf(DeleteShelfRequest) returns (google.protobuf.Empty) {
+    // Client example - deletes the second shelf:
+    //   curl -X DELETE http://DOMAIN_NAME/v1/shelves/2
+    option (google.api.http) = { delete: "/v1/shelves/{shelf}" };
+  }
+}
+
+// A shelf resource.
+message Shelf {
+  // A unique shelf id.
+  int64 id = 1;
+  // A theme of the shelf (fiction, poetry, etc).
+  string theme = 2;
+}
+
+// Response to ListShelves call.
+message ListShelvesResponse {
+  // Shelves in the bookstore.
+  repeated Shelf shelves = 1;
+}
+
+// Request message for CreateShelf method.
+message CreateShelfRequest {
+  // The shelf resource to create.
+  Shelf shelf = 1;
+}
+
+// Request message for GetShelf method.
+message GetShelfRequest {
+  // The ID of the shelf resource to retrieve.
+  int64 shelf = 1;
+}
+
+// Request message for DeleteShelf method.
+message DeleteShelfRequest {
+  // The ID of the shelf to delete.
+  int64 shelf = 1;
+}

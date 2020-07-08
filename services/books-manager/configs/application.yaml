@@ -1,0 +1,4 @@
+http:
+  port: ${HTTP_PORT:8080}
+grpc:
+  port: ${GRPC_PORT:9090}

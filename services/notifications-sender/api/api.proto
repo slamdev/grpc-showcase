@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package notificationssender;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+service NotificationsSender {
+  // Send a notification
+  rpc SendNotification(NotificationRequest) returns (google.protobuf.Empty) {
+    // Client example:
+    //   curl -d '{"text":"Music"}' http://DOMAIN_NAME/v1/notifications
+    option (google.api.http) = {
+      post: "/v1/notifications"
+      body: "notification"
+    };
+  }
+}
+
+// A notification resource.
+message Notification {
+  // A unique notification id.
+  int64 id = 1;
+  // A notification text
+  string text = 2;
+}
+
+// Request message for SendNotification method.
+message NotificationRequest {
+  // The notification resource to send.
+  Notification notification = 1;
+}

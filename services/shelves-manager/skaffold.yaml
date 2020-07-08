@@ -1,0 +1,16 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: shelves-manager
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+    - image: slamdev/grpc-shelves-manager
+      docker:
+        cacheFrom:
+          - adoptopenjdk/openjdk13:jdk-13.0.2_8-alpine-slim
+          - adoptopenjdk/openjdk13:jre-13.0.2_8-alpine
+          - slamdev/grpc-shelves-manager
+deploy:
+  kubectl: {}

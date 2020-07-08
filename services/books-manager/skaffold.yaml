@@ -1,0 +1,16 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: books-manager
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+    - image: slamdev/grpc-books-manager
+      docker:
+        cacheFrom:
+          - golang:1.14-alpine
+          - alpine
+          - slamdev/grpc-books-manager
+deploy:
+  kubectl: {}

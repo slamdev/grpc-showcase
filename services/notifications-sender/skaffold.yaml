@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: notifications-sender
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+    - image: slamdev/grpc-notifications-sender
+      docker:
+        cacheFrom:
+          - python:3.7-stretch
+          - slamdev/grpc-notifications-sender
+deploy:
+  kubectl: {}

@@ -1,0 +1,19 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+grpcio-tools = "*"
+
+[packages]
+flask = "*"
+grpcio = "*"
+dynaconf = "*"
+py-grpc-prometheus = "*"
+googleapis-common-protos = "*"
+requests = "*"
+grpcio-health-checking = "*"
+
+[requires]
+python_version = "3"

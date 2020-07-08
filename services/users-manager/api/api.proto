@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package usersmanager;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+service UsersManager {
+  // Returns a list of users.
+  rpc ListUsers(google.protobuf.Empty) returns (ListUsersResponse) {
+    option (google.api.http) = {get: "/v1/users"};
+  }
+  // Creates a new user.
+  rpc CreateUser(CreateUserRequest) returns (User) {
+    option (google.api.http) = {
+      post: "/v1/users"
+      body: "user"
+    };
+  }
+  // Returns a specific user.
+  rpc GetUser(GetUserRequest) returns (User) {
+    option (google.api.http) = {get: "/v1/users/{user}"};
+  }
+  // Deletes a user.
+  rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {delete: "/v1/users/{user}"};
+  }
+}
+
+// A user resource.
+message User {
+  // A unique user id.
+  int64 id = 1;
+  // A name of the user.
+  string name = 2;
+}
+
+// Response message to ListUsers method.
+message ListUsersResponse {
+  // The users.
+  repeated User users = 1;
+}
+
+// Request message for CreateUser method.
+message CreateUserRequest {
+  // A user resource to create.
+  User user = 1;
+}
+
+// Request message for GetUser method.
+message GetUserRequest {
+  // The ID of the user to retrieve.
+  int64 user = 1;
+}
+
+// Request message for DeleteUser method.
+message DeleteUserRequest {
+  // The ID of the user to delete.
+  int64 user = 1;
+}
