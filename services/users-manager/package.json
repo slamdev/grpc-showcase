@@ -4,7 +4,7 @@
   "main": "build/index.js",
   "private": true,
   "dependencies": {
-    "@grpc/grpc-js": "^1.1.1",
+    "@grpc/grpc-js": "^1.1.8",
     "@grpc/proto-loader": "^0.5.4",
     "convict": "^6.0.0",
     "express": "^4.17.1",
